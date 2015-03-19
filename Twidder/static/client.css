@@ -1,0 +1,313 @@
+body {
+	background-color: #4682B4;
+	margin: 0;
+	padding: 0;
+	font-family: "Lucida Sans";
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #4682B4;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+#main {}
+
+#profileContent {
+	height: 100px;
+	padding: 40px;
+	background-color: red;
+}
+
+/****************
+ * Welcome View *
+ ****************/
+
+#upperspace {
+	height: 100px;
+}
+
+#warning {
+    display: none;
+    width: 228px;
+    height: 38px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+    background-color: #FF0044;
+    color: white;
+    font-weight: bold;
+    float: right;
+}
+
+#warningHome, #warningBrowse, #warningAccount {
+    display: none;
+    width: 258px;
+    //height: 38px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px 20px;
+    background-color: #FF0044;
+    color: white;
+    font-weight: bold;
+}
+
+#wrapper {
+	width: 600px;
+	height: 400px;
+	margin: 0 auto;
+	//background-color: white;
+}
+
+#logo {
+	width: 338px;
+	height: 398px;
+	margin-right: 5px;
+	border: 1px solid black;
+	background-color: white;
+	background-image: url("/static/wimage.png");
+	float: left;
+}
+
+.form p {
+	float: left;
+	margin: 0px;
+}
+
+.form h3 {
+	margin-top: 14px;
+}
+
+#signin {
+	width: 228px;
+	height: 75px;
+	border: 1px solid black;
+	padding: 10px;
+	background-color: white;
+	float: left;
+	line-height: 24px;
+}
+
+#signup {
+	width: 228px;
+	height: 276px;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid black;
+	background-color: white;
+	float: left;
+	line-height: 24px;
+}
+
+#signin input, #signup input {
+	width: 135px;
+	float: right;
+}
+
+#signin select, #signin button, #signup select, #signup button {
+	width: 141px;
+	float: right;
+}
+
+#signin button, #signup button {
+	margin-top: 10px;
+}
+
+/****************
+ * Profile View *
+ ****************/
+
+ #tabrow {
+ 	height: 40px;
+ 	width: 100%;
+ 	background-color: white;
+ 	box-shadow: 0px 1px 5px #555;
+ 	position: fixed;
+ 	margin: 0px;
+ 	padding: 0px;
+ }
+
+ #tabcontainer {
+ 	width: 810px;
+ 	float: left;
+ }
+
+ #tabbox {
+ 	//margin: 0 auto;
+ 	height: 30px;
+ 	width: 690px;
+ 	padding: 5px 0px;
+ 	float: left;
+ }
+
+ #twidderlogo {
+ 	height: 40px;
+ 	width: 100px;
+ 	padding-left: 20px;
+ 	line-height: 40px;
+ 	font-family: "Impact";
+ 	font-size: 24px;
+ 	text-shadow: 1px 1px 4px #777;
+ 	color: red;
+ 	float: left;
+ }
+
+ .tab {
+ 	width: 80px;
+ 	line-height: 30px;
+ 	text-align: center;
+ 	padding: 0px 15px;
+ 	float: right;
+ }
+
+ #contentWrapper {
+ 	width: 830px;
+ 	height: 100px;
+ 	padding-top: 45px;
+ 	background-color: blue;
+ }
+
+.content {
+	display: none;
+	line-height: 24px;
+	//margin-bottom: 65px;
+	padding-top: 65px;
+	background-color: red;
+}
+
+.profilebox {
+	padding: 0px 20px;
+}
+
+#home, #browse, #account {
+	display: none;
+	padding-top: 65px; 
+}
+
+textarea {
+	font-family: "Lucida Sans";
+	font-size: 12px;
+}
+
+/********
+ * HOME *
+ ********/
+
+ #wall, #userWall {
+ 	width: 450px;
+ 	padding-bottom: 40px;
+ 	float: left;
+ }
+
+ #wall input, #wall select, #wall button {
+	width: 444px;
+	float: none;
+	margin-bottom: 5px;
+}
+
+ #personalinfo, #userPersonalinfo {
+ 	width: 300px;
+ 	padding-bottom: 40px;
+ 	float: left;
+ }
+
+ .whitebox {
+ 	background-color: #FFF;
+ 	box-shadow: 1px 1px 5px #555;
+ 	padding: 10px;
+ 	line-height: normal;
+ }
+
+ #wallformwrapper {
+ 	height: 95px;
+ 	width: 450px;
+ }
+
+ #wallformwrapper textarea, #wallformwrapper input, #wallUser textarea, #wallUser input {
+ 	width: 100%;
+ 	height: 50px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	resize: none;
+ }
+
+ #wallformwrapper button, #wallUser button {
+ 	width: 100%;
+ 	margin: 0px;
+ 	padding: 4px;
+ }
+
+ #wallform {
+ 	height: 110px;
+ 	width: 370px;
+ 	float: left;
+ }
+
+ #wallsubmit {
+ 	//background-color: red;
+ 	float: right;
+ }
+
+ #messages, #userMessages {
+ 	font-family: Cambria;
+ 	color: #333;
+ }
+
+
+ /*********
+ * BROWSE *
+ **********/
+
+ #browseHead {
+ 	width: 790px;
+ }
+
+ #browseContent {
+ 	display: none;
+ 	width: 830px;
+ 	//height: auto;
+ 	overflow: hidden;
+ }
+
+ #browseHead input {
+ 	width: 200px;
+ }
+
+ /**********
+ * ACCOUNT *
+ ***********/
+
+#changepassword {
+	width: 250px;
+	padding-bottom: 40px;
+	line-height: 24px;
+}
+
+#changepassword input, #changepassword button {
+	float: right;
+	margin: 0px;
+	width: 120px;
+}
+
+#changepassword button {
+	padding: 4px;
+	width: 126px;
+}
+
+#signout {
+	width: 250px;
+	padding-top: 0px;
+	padding-bottom: 40px;
+}
+
+#signout button {
+	float: left;
+	margin: 0px;
+	padding: 4px;
+}
+
+

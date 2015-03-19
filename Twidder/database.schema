@@ -1,0 +1,27 @@
+CREATE TABLE Users (
+	email		TEXT	PRIMARY KEY	NOT NULL,
+	password	TEXT	NOT NULL,
+	token		TEXT
+);
+
+CREATE TABLE UserData (
+	email		TEXT	PRIMARY KEY	NOT NULL,
+	firstname	TEXT	NOT NULL,
+	lastname	TEXT	NOT NULL,
+	gender		TEXT	NOT NULL,
+	city		TEXT	NOT NULL,
+	country		TEXT	NOT NULL,
+
+	FOREIGN KEY(email) REFERENCES Users(email)
+);
+
+CREATE TABLE Messages (
+	email		TEXT		NOT NULL,
+	sender		TEXT		NOT NULL,
+	message		TEXT,
+	timestamp	DATETIME	DEFAULT (DATETIME(current_timestamp, 'localtime')),
+
+	FOREIGN KEY(email) REFERENCES Users(email)
+);
+
+CREATE INDEX messages_index ON Messages(email);
