@@ -2,7 +2,14 @@
 <html>
 	<head>
 		<link href="/static/client.css" type="text/css" rel="stylesheet">
+		<!--<link href="/static/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">-->
+		<link href="/static/assets/css/jquery-ui.min.css" type="text/css" rel="stylesheet">
 		<script src="/static/client.js" type="text/javascript"></script>
+		<script src="/static/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="/static/assets/js/jquery.flot.min.js" type="text/javascript"></script>
+		<script src="/static/assets/js/jquery.flot.pie.min.js" type="text/javascript"></script>
+		<!--<script src="/static/assets/js/bootstrap.min.js" type="text/javascript"></script>-->
+		<script src="/static/assets/js/jquery-ui.min.js" type="text/javascript"></script>
 
 		<!-- *** WELCOME VIEW *** -->
 		<script id="welcomeView" type="text/view">
@@ -52,6 +59,7 @@
 				<div id="tabcontainer">
 					<div id="twidderlogo">Twidder</div>
 					<div id="tabbox">
+						<div class="tab"><a id="linkStats" href="#stats" onClick="return activateView('stats')" tabindex="4">STATS</a></div>
 						<div class="tab"><a id="linkAccount" href="#account" onClick="return activateView('account')" tabindex="3">ACCOUNT</a></div>
 						<div class="tab"><a id="linkBrowse" href="#browse" onClick="return activateView('browse')" tabindex="2">BROWSE</a></div>
 						<div class="tab"><a id="linkHome" href="#home" onClick="return activateView('home')" tabindex="1">HOME</a></div>
@@ -152,6 +160,15 @@
 						<h3>Sign Out</h3>
 						<button type="button" value="signOut" onclick="return signOut()">Sign Out</button>
 					</div>
+				</div>
+
+				<!--STATS TAB-->
+				<div id="stats">
+                    <div id="warningStats"></div>
+                    <div class="profilebox">
+						<h3>Stats</h3>
+					    <div class="whitebox" id="placeholder" style="width:100%;max-width:800px;height:300px;"></div>
+                    </div>
 				</div>
 
 		</script>

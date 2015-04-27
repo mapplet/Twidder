@@ -98,6 +98,14 @@ def signIn(email, password):
     else:
         return dict(success=False, message='Could not sign in.')
 
+def setOnline(email):
+    query_db('UPDATE Users SET online = ? WHERE email = ?', [1, email])
+    return True
+
+def setOffline(email):
+    query_db('UPDATE Users SET online = ? WHERE email = ?', [0, email])
+    return True
+
 def signUp(email, password, firstname, lastname, gender, city, country):
     result = query_db('SELECT COUNT(email) AS count FROM Users WHERE email = ?', [email])
     #print result
@@ -153,12 +161,13 @@ def getUserData(dict):
 def getUserMessages(dict):
     email = dict['email']
     token = dict['token']
+    result = None
     if email:
         result = query_db('SELECT sender, message, timestamp FROM Messages WHERE email = ?', [email])
-        return result
     elif token:
         result = query_db('SELECT sender, message, timestamp FROM Messages WHERE email = (SELECT email FROM Users WHERE token = ?)', [token])
-        return result
+
+    return result
 
 def postMessage(token, content, toEmail):
     token = str(token)
@@ -173,3 +182,37 @@ def postMessage(token, content, toEmail):
         return True
     else:
         return False
+
+def increasePostsCount(token, email):
+    if email:
+        query_db('UPDATE Users SET posts = posts + 1 WHERE email = ?', [email])
+        result = query_db('SELECT posts FROM Users WHERE email = ?', [email])[0]['posts']
+    else:
+        query_db('UPDATE Users SET posts = posts + 1 WHERE token = ?', [token])
+        result = query_db('SELECT posts FROM Users WHERE token = ?', [token])[0]['posts']
+
+    return result
+
+def increaseVisitorsCount(email):
+    query_db('UPDATE Users SET visitors = visitors + 1 WHERE email = ?', [email])
+    result = query_db('SELECT visitors FROM Users WHERE email = ?', [email])[0]['visitors']
+    return result
+
+def getStats(token):
+    countOnline = query_db('SELECT COUNT(*) AS count FROM Users WHERE online = ?', [1])
+    countVisitorsPosts = query_db('SELECT visitors, posts FROM Users WHERE token = ?', [token])
+    result = dict(online=countOnline[0]['count'],
+                  visitors=countVisitorsPosts[0]['visitors'],
+                  posts=countVisitorsPosts[0]['posts'])
+    return result
+
+def getTokenByEmail(email):
+    # Return False if email is None
+    if not email:
+        return False
+    token = query_db('SELECT token FROM Users WHERE email = ?', [email])[0]['token']
+    # Return False if email has no token (user is not signed in)
+    if not token:
+        return False
+    # Else, return token
+    return token

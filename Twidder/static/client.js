@@ -4,6 +4,7 @@ var profileView = "profileView";
 var home = "home";
 var account = "account";
 var browse = "browse";
+var stats = "stats";
 var websocket = null;
 
 displayView = function(){
@@ -12,7 +13,6 @@ displayView = function(){
     if (localStorage.token) {
 
         console.log('  > User is signed in.');
-
         setView(profileView, home);
         tokenIsValid = setUserData();
         initWebSocket();
@@ -22,6 +22,9 @@ displayView = function(){
 	    }
 	    else if (location.hash == "#browse") {
 	        setView(profileView, browse);
+	    }
+        else if (location.hash == "#stats") {
+	        setView(profileView, stats);
 	    }
 	    else if (validateEmail(location.hash.substr(1))) {
 	        setView(profileView, browse);
@@ -49,8 +52,9 @@ function onClose(msg) {
         setView(welcomeView);
 }
 function onMessage(msg) {
-    console.log("WebSocket: RECEIVED MSG(\"" + msg + "\")");
-    // websocket.close();
+    console.log("WebSocket: RECEIVED MSG(\"" + msg['data'] + "\")");
+    // web.close();
+    plotStats();
 }
 function onError(msg) {
     console.log("WebSocket: ERROR(\"" + msg.data + "\")");
@@ -100,9 +104,11 @@ initWebSocket = function() {
         websocket.onmessage = function(msg) { onMessage(msg); };
         websocket.onclose = function(msg) { onClose(msg); };
         websocket.onerror = function(msg) { onError(msg); };
+        return true;
     }
     else {
         console.log("WebSocket not supported");
+        return false;
     }
 };
 
@@ -331,6 +337,7 @@ browseSearch = function(email){
 	    document.getElementById("userFullcontact").innerHTML = json.data.email;
 
 	    updateWall("userMessages", email);
+        increaseVisitorCount(email);
     };
     failure = function(){
         printWarning(json.message, "browse");
@@ -345,8 +352,8 @@ activateView = function(type){
 
     console.log("Entering activateView");
 
-    var tabs = ["home", "browse", "account"];
-    var links = ["linkHome", "linkBrowse", "linkAccount"];
+    var tabs = ["home", "browse", "account", "stats"];
+    var links = ["linkHome", "linkBrowse", "linkAccount", "linkStats"];
     var count = tabs.length;
     for (i = 0; i<count; ++i)
     {
@@ -356,15 +363,53 @@ activateView = function(type){
 	        document.getElementById(links[i]).style.pointerEvents = "auto";
 	        document.getElementById(tabs[i]).style.display = "none";
 	    }
-	    else if (tabs[i]==type)
-	    {
-	        document.getElementById(links[i]).style.color = "#CCC";
-	        document.getElementById(links[i]).style.pointerEvents = "none";
-	        document.getElementById(tabs[i]).style.display = "block";
-	    }
+	    else if (tabs[i]==type) {
+            document.getElementById(links[i]).style.color = "#CCC";
+            document.getElementById(links[i]).style.pointerEvents = "none";
+            document.getElementById(tabs[i]).style.display = "block";
+            if (tabs[i] == stats) {
+                plotStats();
+            }
+        }
     }
 
     return true;
+};
+
+plotStats = function(){
+
+    success = function() {
+        var data = [
+            {label: "Besökare", data: json.data.visitors},
+            {label: "Antal wall-inlägg", data: json.data.posts},
+            {label: "Online just nu", data: json.data.online}
+        ];
+
+        $.plot($("#placeholder"), data, {
+            series: {
+                pie: {
+                    show: true,
+                    label: {
+                        show: true,
+                        formatter: function (label, series) {
+                            return '<h3>' + series.data[0][1] + ' st</3>';
+                        }
+                    }
+                }
+            },
+            grid: {
+                hoverable: true,
+                clickable: true
+            }
+        });
+    };
+    failure = function(){
+        printWarning(json.message, profileView);
+    };
+
+    var route = "get_stats";
+    var formData = "token="+localStorage.token;
+    return xmlHttpRequest(success, failure, route, formData);
 };
 
 updateWall = function(wall){
@@ -401,5 +446,15 @@ updateWall = function(wall){
     var formData = "token="+localStorage.token;
 
 
+    return xmlHttpRequest(success, failure, route, formData);
+};
+
+increaseVisitorCount = function(email){
+    console.log("Entering increaseVisitorCount");
+
+    success = function(){};
+    failure = function(){};
+    var route = "increase_visitor_count";
+    var formData = "email="+email;
     return xmlHttpRequest(success, failure, route, formData);
 };

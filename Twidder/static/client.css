@@ -1,5 +1,5 @@
 body {
-	background-color: #4682B4;
+	background-color: #4682B4 !important;
 	margin: 0;
 	padding: 0;
 	font-family: "Lucida Sans";
@@ -15,7 +15,9 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-#main {}
+#main {
+    background-color: #4682B4;
+}
 
 #profileContent {
 	height: 100px;
@@ -44,7 +46,7 @@ a:hover {
     float: right;
 }
 
-#warningHome, #warningBrowse, #warningAccount {
+#warningHome, #warningBrowse, #warningAccount, #warningStats {
     display: none;
     width: 258px;
     //height: 38px;
@@ -60,7 +62,6 @@ a:hover {
 	width: 600px;
 	height: 400px;
 	margin: 0 auto;
-	//background-color: white;
 }
 
 #logo {
@@ -183,7 +184,7 @@ a:hover {
 	padding: 0px 20px;
 }
 
-#home, #browse, #account {
+#home, #browse, #account, #stats {
 	display: none;
 	padding-top: 65px; 
 }

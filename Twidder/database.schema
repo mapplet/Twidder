@@ -1,7 +1,10 @@
 CREATE TABLE Users (
 	email		TEXT	PRIMARY KEY	NOT NULL,
 	password	TEXT	NOT NULL,
-	token		TEXT
+	token		TEXT,
+	online      TINYINT UNSIGNED DEFAULT 0,
+	visitors    INT UNSIGNED DEFAULT 0,
+	posts       INT UNSIGNED DEFAULT 0
 );
 
 CREATE TABLE UserData (
